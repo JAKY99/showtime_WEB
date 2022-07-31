@@ -1,0 +1,22 @@
+@import "src/styles";
+
+i:hover{
+  color: $secondary-color;
+  cursor: pointer;
+}
+
+.p-avatar-circle:hover{
+  border-radius: 10%;
+}
+
+.user-details {
+  p{
+    margin: 0;
+    text-align: end;
+    font-size: smaller;
+  }
+}
+
+.avatar-container:hover p{
+  color: $secondary-color;
+}

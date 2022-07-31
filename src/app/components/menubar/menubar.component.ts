@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {MenuItem} from "primeng/api";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {MenuItem, MessageService} from "primeng/api";
+import {TokenStorageService} from "../../services/token-storage.service";
+import {Router} from "@angular/router";
+import {UserManageAuthorities} from "../../common/enums/authorities/permissions-enum";
 
 @Component({
   selector: 'app-menubar',
@@ -8,9 +11,23 @@ import {MenuItem} from "primeng/api";
 })
 export class MenubarComponent implements OnInit {
 
+  private clientAuthorities: object = {
+    role: null,
+    permissions: []
+  };
+
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private messageService: MessageService,
+    private router: Router) {
+  }
+
   items: MenuItem[] = [];
 
   ngOnInit(): void {
+    // @ts-ignore
+    this.clientAuthorities = this.tokenStorage.getClientAuthorities();
+
     this.items = [
       {
         label:'File',
@@ -67,6 +84,41 @@ export class MenubarComponent implements OnInit {
         ]
       },
       {
+        label:'Events',
+        icon:'pi pi-fw pi-calendar',
+        items:[
+          {
+            label:'Edit',
+            icon:'pi pi-fw pi-pencil',
+            items:[
+              {
+                label:'Save',
+                icon:'pi pi-fw pi-calendar-plus'
+              },
+              {
+                label:'Delete',
+                icon:'pi pi-fw pi-calendar-minus'
+              },
+
+            ]
+          },
+          {
+            label:'Archieve',
+            icon:'pi pi-fw pi-calendar-times',
+            items:[
+              {
+                label:'Remove',
+                icon:'pi pi-fw pi-calendar-minus'
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // @ts-ignore
+    if (this.clientAuthorities?.permissions.includes(UserManageAuthorities.USER_MANAGE_USERS)){
+      this.items.push({
         label:'Users',
         icon:'pi pi-fw pi-user',
         items:[
@@ -101,43 +153,29 @@ export class MenubarComponent implements OnInit {
             ]
           }
         ]
-      },
-      {
-        label:'Events',
-        icon:'pi pi-fw pi-calendar',
-        items:[
-          {
-            label:'Edit',
-            icon:'pi pi-fw pi-pencil',
-            items:[
-              {
-                label:'Save',
-                icon:'pi pi-fw pi-calendar-plus'
-              },
-              {
-                label:'Delete',
-                icon:'pi pi-fw pi-calendar-minus'
-              },
-
-            ]
-          },
-          {
-            label:'Archieve',
-            icon:'pi pi-fw pi-calendar-times',
-            items:[
-              {
-                label:'Remove',
-                icon:'pi pi-fw pi-calendar-minus'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        label:'Quit',
-        icon:'pi pi-fw pi-power-off'
-      }
-    ];
+      });
+    }
   }
+
+  logOut() {
+    this.tokenStorage.logOut();
+    this.router.navigate(['/login']).then();
+  }
+
+  showConfirmLogout() {
+    this.messageService.add({key: 'showConfirmLogout', sticky: true, severity:'custom', summary:'Log Out', detail:'Are you sure?'});
+  }
+
+  onLogoutConfirm() {
+    this.messageService.clear('showConfirmLogout');
+    this.logOut();
+  }
+
+  onLogoutReject() {
+    this.messageService.clear('showConfirmLogout');
+  }
+
+
+
 
 }
