@@ -8,7 +8,7 @@ import {HttpHeaders} from "@angular/common/http";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {ClientErrorsEnum} from "../../common/enums/http-status-codes/client-errors-enum";
-
+import{getStatusInfo} from "../../common/enums/http-status-codes/client-http-status-list";
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -71,14 +71,15 @@ export class LoginFormComponent implements OnInit {
         this.isLoading = false;
       })
       .catch(err => {
-        if (err.status === ClientErrorsEnum.ClientErrorForbidden){
+        let statusGesture = getStatusInfo(err.status)
+        
           this.addSingleToast(
-            'error',
-            'Authentication error',
-            'The email or password you entered is incorrect',
+            `error`,
+            statusGesture.type,
+            statusGesture.message,
             true
           )
-        }
+       
         this.isLoading = false;
       });
   }
