@@ -72,13 +72,15 @@ export class LoginFormComponent implements OnInit {
       })
       .catch(err => {
         let statusGesture = getStatusInfo(err.status)
-        
+        if(statusGesture.viewable){
           this.addSingleToast(
             `error`,
             statusGesture.type,
             statusGesture.message,
             true
           )
+        }
+          
        
         this.isLoading = false;
       });
