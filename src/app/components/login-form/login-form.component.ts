@@ -80,8 +80,6 @@ export class LoginFormComponent implements OnInit {
             true
           )
         }
-          
-       
         this.isLoading = false;
       });
   }
