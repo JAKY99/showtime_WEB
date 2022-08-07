@@ -27,6 +27,9 @@ import {AvatarModule} from "primeng/avatar";
 import {BadgeModule} from "primeng/badge";
 import {SlideMenuModule} from "primeng/slidemenu";
 import {RippleModule} from "primeng/ripple";
+import { UsersListComponent } from './pages/users-pages/users-list/users-list.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import {BreadcrumbModule} from "primeng/breadcrumb";
 
 @NgModule({
   declarations: [
@@ -35,29 +38,32 @@ import {RippleModule} from "primeng/ripple";
     LoginFormComponent,
     LoginPageComponent,
     HomePageComponent,
-    AvatarMenuComponent
+    AvatarMenuComponent,
+    UsersListComponent,
+    BreadcrumbComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        SidebarModule,
-        ButtonModule,
-        MenubarModule,
-        InputTextModule,
-        CardModule,
-        FormsModule,
-        PasswordModule,
-        DividerModule,
-        ReactiveFormsModule,
-        ToastModule,
-        BlockUIModule,
-        AvatarModule,
-        BadgeModule,
-        SlideMenuModule,
-        RippleModule,
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SidebarModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    CardModule,
+    FormsModule,
+    PasswordModule,
+    DividerModule,
+    ReactiveFormsModule,
+    ToastModule,
+    BlockUIModule,
+    AvatarModule,
+    BadgeModule,
+    SlideMenuModule,
+    RippleModule,
+    BreadcrumbModule,
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,3 +1,4 @@
 <app-menubar *ngIf="!isRouteLogin()" (onDocumentBlock)="toggleBlockDocument()"></app-menubar>
+<app-breadcrumb></app-breadcrumb>
 <router-outlet></router-outlet>
 <p-blockUI [blocked]="blockedDocument"></p-blockUI>

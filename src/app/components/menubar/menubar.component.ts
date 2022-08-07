@@ -137,18 +137,13 @@ export class MenubarComponent implements OnInit {
             icon:'pi pi-fw pi-users',
             items:[
               {
-                label:'Filter',
-                icon:'pi pi-fw pi-filter',
-                items:[
-                  {
-                    label:'Print',
-                    icon:'pi pi-fw pi-print'
-                  }
-                ]
+                label:'Search by email',
+                icon:'pi pi-fw pi-search',
               },
               {
                 icon:'pi pi-fw pi-bars',
-                label:'List'
+                label:'List',
+                command: () => this.gotToLink('home/users/list')
               }
             ]
           }
@@ -175,7 +170,7 @@ export class MenubarComponent implements OnInit {
     this.messageService.clear('showConfirmLogout');
   }
 
-
-
-
+  gotToLink(link: string){
+    this.router.navigate([link]).then();
+  }
 }
