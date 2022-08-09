@@ -3,6 +3,9 @@
     <app-avatar-menu (onLogOutEmit)="showConfirmLogout()"></app-avatar-menu>
   </div>
 </p-menubar>
+<div>
+  <app-breadcrumb></app-breadcrumb>
+</div>
 <p-toast position="center" key="showConfirmLogout" (onClose)="onLogoutReject()" [baseZIndex]="5000">
   <ng-template let-message pTemplate="message">
     <div class="flex flex-column" style="flex: 1">
