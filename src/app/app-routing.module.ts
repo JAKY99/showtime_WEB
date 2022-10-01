@@ -4,6 +4,7 @@ import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {AuthGuard} from "./auth.guard";
 import {UsersListComponent} from "./pages/users-pages/users-list/users-list.component";
+import {PermissionListComponent} from "./pages/security-pages/permission-list/permission-list.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -26,6 +27,17 @@ const routes: Routes = [
             component: UsersListComponent,
             canActivate: [AuthGuard],
             data: {breadcrumb: 'Users list'}
+          }
+        ]
+      },
+      {
+        path: 'security',
+        children: [
+          {
+            path: 'permission',
+            component: PermissionListComponent,
+            canActivate: [AuthGuard],
+            data: {breadcrumb: 'Permissions list'}
           }
         ]
       }

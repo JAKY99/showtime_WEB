@@ -1,0 +1,84 @@
+<div class="m-4">
+  <div class="card m-4">
+    <p-table
+      [value]="permissions" [paginator]="true"
+      [rows]="rows" [showCurrentPageReport]="true"
+      [(first)]="first"
+      responsiveLayout="scroll"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[5,10,25,50]"
+      [lazy]="true" (onLazyLoad)="loadPermissions($event)"
+      [loading]="loading"
+      [totalRecords]="totalRecords"
+      styleClass="p-datatable-gridlines"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <h3 class="m-0 flex align-items-center">Permissions List</h3>
+          <div class="ml-auto">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-sm mr-2"
+                    (click)="true"></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="display_name">Display Name
+            <p-sortIcon field="display_name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="permission">permission
+            <p-sortIcon field="permission"></p-sortIcon>
+          </th>
+          <th pSortableColumn="description">Description
+            <p-sortIcon field="description"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <th>
+            <p-columnFilter type="text" field="display_name"></p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter field="permission" matchMode="in" [showMenu]="false">
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect [ngModel]="value" [options]="permissions" placeholder="Any"
+                               (onChange)="filter($event.value)" optionLabel="permission">
+                  <ng-template let-option pTemplate="item">
+                    <div class="p-multiselect-permissions-option">
+                      <span class="ml-1">{{option.permission}}</span>
+                    </div>
+                  </ng-template>
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          </th>
+          <th>
+            <p-columnFilter type="text" field="description"></p-columnFilter>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-permission>
+        <tr>
+          <td>{{permission.display_name}}</td>
+          <td>{{permission.permission}}</td>
+          <td>{{permission.description}}</td>
+          <td>
+            <button style="font-size: .4em" pButton pRipple pTooltip="Edit"
+                    tooltipPosition="top"
+                    icon="pi pi-pencil"
+                    class="p-button-sm p-button-warning mr-2"></button>
+            <button style="font-size: .4em" pButton pRipple pTooltip="Delete"
+                    tooltipPosition="top" icon="pi pi-trash"
+                    class="p-button-sm p-button-danger"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="5">No data available...</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
