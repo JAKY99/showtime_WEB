@@ -47,7 +47,9 @@
             <button style="font-size: .4em" pButton pRipple pTooltip="Edit"
                     tooltipPosition="top"
                     icon="pi pi-pencil"
-                    class="p-button-sm p-button-warning mr-2"></button>
+                    class="p-button-sm p-button-warning mr-2"
+                    (click)="showEditPermissionDialog(permission.id)"
+            ></button>
             <button style="font-size: .4em" pButton pRipple pTooltip="Delete"
                     tooltipPosition="top" icon="pi pi-trash"
                     class="p-button-sm p-button-danger"></button>
@@ -62,7 +64,12 @@
     </p-table>
   </div>
 </div>
-<app-permission-dialog
+<app-permission-add-dialog
   #newPermissionDialogRef
   (permissionSaved)="search(searchParams)"
-></app-permission-dialog>
+></app-permission-add-dialog>
+<app-permission-edit-dialog
+  #editPermissionDialogRef
+  (permissionSaved)="search(searchParams)"
+>
+</app-permission-edit-dialog>

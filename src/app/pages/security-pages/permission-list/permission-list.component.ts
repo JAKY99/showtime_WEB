@@ -5,8 +5,11 @@ import {PermissionService} from "../../../services/authorities/permission.servic
 import {SearchParamsModel} from "../../../models/search/searchParams";
 import {SearchService} from "../../../services/search/search.service";
 import {
-  PermissionDialogComponent
-} from "../../../components/permission/permission-dialog/permission-dialog.component";
+  PermissionAddDialogComponent
+} from "../../../components/permission/permission-add-dialog/permission-add-dialog.component";
+import {
+  PermissionEditDialogComponent
+} from "../../../components/permission/permission-edit-dialog/permission-edit-dialog.component";
 
 @Component({
   selector: 'app-permission-list',
@@ -16,7 +19,8 @@ import {
 })
 export class PermissionListComponent implements OnInit {
 
-  @ViewChild('newPermissionDialogRef') newPermissionDialogChild: PermissionDialogComponent | undefined;
+  @ViewChild('newPermissionDialogRef') newPermissionDialogChild: PermissionAddDialogComponent | undefined;
+  @ViewChild('editPermissionDialogRef') editPermissionDialogChild: PermissionEditDialogComponent | undefined;
 
   // @ts-ignore
   permissions: PermissionModel[] = [];
@@ -83,6 +87,10 @@ export class PermissionListComponent implements OnInit {
 
   showNewPermissionDialog() {
     this.newPermissionDialogChild?.showDialog();
+  }
+
+  showEditPermissionDialog(permissionId: number) {
+    this.editPermissionDialogChild?.showDialog(permissionId);
   }
 
 }

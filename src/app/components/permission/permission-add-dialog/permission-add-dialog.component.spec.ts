@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PermissionDialogComponent} from './permission-dialog.component';
+import {PermissionAddDialogComponent} from './permission-add-dialog.component';
 
 describe('NewPermissionDialogComponent', () => {
-  let component: PermissionDialogComponent;
-  let fixture: ComponentFixture<PermissionDialogComponent>;
+  let component: PermissionAddDialogComponent;
+  let fixture: ComponentFixture<PermissionAddDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PermissionDialogComponent]
+      declarations: [PermissionAddDialogComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PermissionDialogComponent);
+    fixture = TestBed.createComponent(PermissionAddDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

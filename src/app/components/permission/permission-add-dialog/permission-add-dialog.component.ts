@@ -3,11 +3,11 @@ import {PermissionFormComponent} from "../permission-form/permission-form.compon
 import {MessageService} from "primeng/api";
 
 @Component({
-  selector: 'app-permission-dialog',
-  templateUrl: './permission-dialog.component.html',
-  styleUrls: ['./permission-dialog.component.scss']
+  selector: 'app-permission-add-dialog',
+  templateUrl: './permission-add-dialog.component.html',
+  styleUrls: ['./permission-add-dialog.component.scss']
 })
-export class PermissionDialogComponent implements OnInit {
+export class PermissionAddDialogComponent implements OnInit {
 
   // @ts-ignore
   @ViewChild('newPermissionFormRef') newPermissionFormChild: PermissionFormComponent;

@@ -1,10 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {GlobalRegex} from "../../../common/constants/global-regex";
 import {RegexFieldValidator} from "../../../common/validators/RegexFieldValidator";
 import {PermissionService} from "../../../services/authorities/permission.service";
 import {PermissionModel, PermissionNoIdModel} from "../../../models/Authorities/permission-model";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-permission-form',
@@ -17,6 +16,8 @@ export class PermissionFormComponent implements OnInit {
   public form: FormGroup;
 
   @Output() permissionSaved = new EventEmitter<{ id: number | null }>();
+
+  @Input() permissionId: number = 0;
 
   public isDisplayNameFieldError: boolean = false;
   public permissionFieldError: string = "";
@@ -55,6 +56,17 @@ export class PermissionFormComponent implements OnInit {
     })
   }
 
+  getPermission() {
+    this.permissionService.getPermission(this.permissionId).toPromise()
+      .then((res) => {
+        this.form.setValue({
+          permission: res.permission,
+          displayName: res.displayName,
+          description: res.description
+        });
+      })
+  }
+
   get displayNameControl() {
     return this.form.controls['displayName'];
   }
@@ -81,12 +93,13 @@ export class PermissionFormComponent implements OnInit {
   }
 
   async submitPermission() {
-    const newPermission: PermissionNoIdModel = {
+    const newPermission: PermissionModel = {
+      id: this.permissionId,
       permission: this.form.value.permission,
       description: this.form.value.description,
       displayName: this.form.value.displayName
     }
-    await this.permissionService.addPermission(newPermission).toPromise()
+    await this.permissionService.editPermission(newPermission).toPromise()
       .then((resp) => {
         this.permissionSaved.emit({id: resp});
       })

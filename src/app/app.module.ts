@@ -34,12 +34,13 @@ import {PermissionListComponent} from './pages/security-pages/permission-list/pe
 import {TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
 import {
-  PermissionDialogComponent
-} from './components/permission/permission-dialog/permission-dialog.component';
+  PermissionAddDialogComponent
+} from './components/permission/permission-add-dialog/permission-add-dialog.component';
 import {PermissionFormComponent} from './components/permission/permission-form/permission-form.component';
 import {DialogModule} from "primeng/dialog";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
+import { PermissionEditDialogComponent } from './components/permission/permission-edit-dialog/permission-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,8 +53,9 @@ import {InputMaskModule} from "primeng/inputmask";
     UsersListComponent,
     BreadcrumbComponent,
     PermissionListComponent,
-    PermissionDialogComponent,
+    PermissionAddDialogComponent,
     PermissionFormComponent,
+    PermissionEditDialogComponent,
   ],
   imports: [
     HttpClientModule,
