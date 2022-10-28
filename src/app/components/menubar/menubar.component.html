@@ -3,7 +3,7 @@
     <app-avatar-menu (onLogOutEmit)="showConfirmLogout()"></app-avatar-menu>
   </div>
 </p-menubar>
-<div>
+<div *ngIf="router.url !== '/login'">
   <app-breadcrumb></app-breadcrumb>
 </div>
 <p-toast position="center" key="showConfirmLogout" (onClose)="onLogoutReject()" [baseZIndex]="5000">

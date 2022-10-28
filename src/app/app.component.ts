@@ -14,16 +14,19 @@ export class AppComponent {
 
   constructor(private primengConfig: PrimeNGConfig, public router: Router) {
   }
+
   ngOnInit() {
     this.primengConfig.ripple = true;
   }
+
   title = 'Showtime';
 
-  toggleBlockDocument(){
+  toggleBlockDocument() {
     this.blockedDocument = !this.blockedDocument;
   }
 
-  isRouteLogin(){
+  isRouteLogin() {
+    console.log(this.router.url == '/login')
     return this.router.url == '/login';
   }
 }

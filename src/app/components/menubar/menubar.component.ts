@@ -19,7 +19,7 @@ export class MenubarComponent implements OnInit {
   constructor(
     private tokenStorage: TokenStorageService,
     private messageService: MessageService,
-    private router: Router) {
+    public router: Router) {
   }
 
   items: MenuItem[] = [];
@@ -30,85 +30,85 @@ export class MenubarComponent implements OnInit {
 
     this.items = [
       {
-        label:'File',
-        icon:'pi pi-fw pi-file',
-        items:[
+        label: 'File',
+        icon: 'pi pi-fw pi-file',
+        items: [
           {
-            label:'New',
-            icon:'pi pi-fw pi-plus',
-            items:[
+            label: 'New',
+            icon: 'pi pi-fw pi-plus',
+            items: [
               {
-                label:'Bookmark',
-                icon:'pi pi-fw pi-bookmark'
+                label: 'Bookmark',
+                icon: 'pi pi-fw pi-bookmark'
               },
               {
-                label:'Video',
-                icon:'pi pi-fw pi-video'
+                label: 'Video',
+                icon: 'pi pi-fw pi-video'
               },
             ]
           },
           {
-            label:'Delete',
-            icon:'pi pi-fw pi-trash'
+            label: 'Delete',
+            icon: 'pi pi-fw pi-trash'
           },
           {
-            separator:true
+            separator: true
           },
           {
-            label:'Export',
-            icon:'pi pi-fw pi-external-link'
+            label: 'Export',
+            icon: 'pi pi-fw pi-external-link'
           }
         ]
       },
       {
-        label:'Edit',
-        icon:'pi pi-fw pi-pencil',
-        items:[
+        label: 'Edit',
+        icon: 'pi pi-fw pi-pencil',
+        items: [
           {
-            label:'Left',
-            icon:'pi pi-fw pi-align-left'
+            label: 'Left',
+            icon: 'pi pi-fw pi-align-left'
           },
           {
-            label:'Right',
-            icon:'pi pi-fw pi-align-right'
+            label: 'Right',
+            icon: 'pi pi-fw pi-align-right'
           },
           {
-            label:'Center',
-            icon:'pi pi-fw pi-align-center'
+            label: 'Center',
+            icon: 'pi pi-fw pi-align-center'
           },
           {
-            label:'Justify',
-            icon:'pi pi-fw pi-align-justify'
+            label: 'Justify',
+            icon: 'pi pi-fw pi-align-justify'
           },
 
         ]
       },
       {
-        label:'Events',
-        icon:'pi pi-fw pi-calendar',
-        items:[
+        label: 'Events',
+        icon: 'pi pi-fw pi-calendar',
+        items: [
           {
-            label:'Edit',
-            icon:'pi pi-fw pi-pencil',
-            items:[
+            label: 'Edit',
+            icon: 'pi pi-fw pi-pencil',
+            items: [
               {
-                label:'Save',
-                icon:'pi pi-fw pi-calendar-plus'
+                label: 'Save',
+                icon: 'pi pi-fw pi-calendar-plus'
               },
               {
-                label:'Delete',
-                icon:'pi pi-fw pi-calendar-minus'
+                label: 'Delete',
+                icon: 'pi pi-fw pi-calendar-minus'
               },
 
             ]
           },
           {
-            label:'Archieve',
-            icon:'pi pi-fw pi-calendar-times',
-            items:[
+            label: 'Archieve',
+            icon: 'pi pi-fw pi-calendar-times',
+            items: [
               {
-                label:'Remove',
-                icon:'pi pi-fw pi-calendar-minus'
+                label: 'Remove',
+                icon: 'pi pi-fw pi-calendar-minus'
               }
             ]
           }
@@ -117,38 +117,60 @@ export class MenubarComponent implements OnInit {
     ];
 
     // @ts-ignore
-    if (this.clientAuthorities?.permissions.includes(UserManageAuthorities.USER_MANAGE_USERS)){
+    if (this.clientAuthorities?.permissions.includes(UserManageAuthorities.USER_MANAGE_USERS)) {
       this.items.push({
-        label:'Users',
-        icon:'pi pi-fw pi-user',
-        items:[
+        label: 'Users',
+        icon: 'pi pi-fw pi-user',
+        items: [
           {
-            label:'New',
-            icon:'pi pi-fw pi-user-plus',
+            label: 'New',
+            icon: 'pi pi-fw pi-user-plus',
 
           },
           {
-            label:'Delete',
-            icon:'pi pi-fw pi-user-minus',
+            label: 'Delete',
+            icon: 'pi pi-fw pi-user-minus',
 
           },
           {
-            label:'Search',
-            icon:'pi pi-fw pi-users',
-            items:[
+            label: 'Search',
+            icon: 'pi pi-fw pi-users',
+            items: [
               {
-                label:'Search by email',
-                icon:'pi pi-fw pi-search',
+                label: 'Search by email',
+                icon: 'pi pi-fw pi-search',
               },
               {
-                icon:'pi pi-fw pi-bars',
-                label:'List',
+                icon: 'pi pi-fw pi-bars',
+                label: 'List',
                 command: () => this.gotToLink('home/users/list')
               }
             ]
           }
         ]
       });
+    }
+
+    // @ts-ignore
+    if (this.clientAuthorities?.permissions.includes(UserManageAuthorities.USER_MANAGE_PERMISSION)) {
+      this.items.push({
+        label: 'Security',
+        icon: 'pi pi-fw pi-shield',
+        items: [
+          {
+            label: 'Search',
+            icon: 'pi pi-fw pi-shield',
+            items: [
+              {
+                label: 'Permissions List',
+                icon: 'pi pi-fw pi-list',
+                command: () => this.gotToLink('home/security/permission')
+              }
+            ]
+          }
+
+        ]
+      })
     }
   }
 
@@ -158,7 +180,13 @@ export class MenubarComponent implements OnInit {
   }
 
   showConfirmLogout() {
-    this.messageService.add({key: 'showConfirmLogout', sticky: true, severity:'custom', summary:'Log Out', detail:'Are you sure?'});
+    this.messageService.add({
+      key: 'showConfirmLogout',
+      sticky: true,
+      severity: 'custom',
+      summary: 'Log Out',
+      detail: 'Are you sure?'
+    });
   }
 
   onLogoutConfirm() {
@@ -170,7 +198,7 @@ export class MenubarComponent implements OnInit {
     this.messageService.clear('showConfirmLogout');
   }
 
-  gotToLink(link: string){
+  gotToLink(link: string) {
     this.router.navigate([link]).then();
   }
 }
