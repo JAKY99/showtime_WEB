@@ -19,7 +19,7 @@ export class MenubarComponent implements OnInit {
   constructor(
     private tokenStorage: TokenStorageService,
     private messageService: MessageService,
-    private router: Router) {
+    public router: Router) {
   }
 
   items: MenuItem[] = [];

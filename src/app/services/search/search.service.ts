@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {SearchParamsModel} from "../../models/search/searchParams";
-import {FilterMetadata, LazyLoadEvent} from "primeng/api";
-import {FilterPermissionModel} from "../../models/search/filters-model/filter-permission-model";
+import {LazyLoadEvent} from "primeng/api";
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +10,16 @@ export class SearchService {
   constructor() {
   }
 
-  getSearchParams($event: LazyLoadEvent, filters: FilterPermissionModel): SearchParamsModel {
+  getSearchParams($event: LazyLoadEvent): SearchParamsModel {
     return {
-      first: $event.first,
+      // @ts-ignore
+      pageNumber: Math.round($event.first / $event.rows),
       limitRow: $event.rows,
       sort: {
         sortField: $event.sortField,
         sortOrder: $event.sortOrder
       },
-      filters: filters
+      filters: $event.filters
     }
   }
 }

@@ -1,48 +1,40 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {PermissionModel} from "../../../models/Authorities/permission-model";
 import {LazyLoadEvent} from "primeng/api";
 import {PermissionService} from "../../../services/authorities/permission.service";
 import {SearchParamsModel} from "../../../models/search/searchParams";
 import {SearchService} from "../../../services/search/search.service";
-import {FilterPermissionModel} from "../../../models/search/filters-model/filter-permission-model";
+import {
+  PermissionDialogComponent
+} from "../../../components/permission/permission-dialog/permission-dialog.component";
 
 @Component({
   selector: 'app-permission-list',
   templateUrl: './permission-list.component.html',
-  styleUrls: ['./permission-list.component.scss']
+  styleUrls: ['./permission-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PermissionListComponent implements OnInit {
+
+  @ViewChild('newPermissionDialogRef') newPermissionDialogChild: PermissionDialogComponent | undefined;
 
   // @ts-ignore
   permissions: PermissionModel[] = [];
 
-  first = 0;
-  rows = 10;
+  first: number = 0;
+  rows: number = 10;
   totalRecords: number = 0;
   // @ts-ignore
   loading: boolean = true;
-  filters: FilterPermissionModel = {
-    permissions: {
-      matchMode: null,
-      value: []
-    },
-    description: {
-      matchMode: null,
-      value: null
-    },
-    displayName: {
-      matchMode: null,
-      value: null
-    }
-  }
+
   searchParams: SearchParamsModel = {
-    first: this.first,
+    pageNumber: this.first,
     limitRow: this.rows,
     sort: {
       sortField: null,
       sortOrder: null
     },
-    filters: this.filters
+    filters: null
   }
 
   constructor(private permissionService: PermissionService, private searchService: SearchService) {
@@ -53,13 +45,11 @@ export class PermissionListComponent implements OnInit {
   }
 
   async loadPermissions($event: LazyLoadEvent) {
-    let filters = this.setSearchParamsFilters($event);
-    console.log(filters);
-    await this.search(this.searchService.getSearchParams($event,filters));
-    this.loading = false;
+    await this.search(this.searchService.getSearchParams($event));
   }
 
   async search(searchParams: SearchParamsModel) {
+    this.loading = true;
     await this.permissionService.getPermissions(searchParams).toPromise()
       .then(res => {
         this.permissions = res.listOfResults;
@@ -68,24 +58,7 @@ export class PermissionListComponent implements OnInit {
       .catch(err => {
         console.log(err)
       })
-  }
-
-  setSearchParamsFilters($event: LazyLoadEvent) {
-    let filters = $event.filters;
-    return {
-      permissions: {
-        matchMode: filters?.permission?.matchMode,
-        value: filters?.permission?.value
-      },
-      description: {
-        matchMode: filters?.description?.matchMode,
-        value: filters?.description?.value
-      },
-      displayName: {
-        matchMode: filters?.display_name?.matchMode,
-        value: filters?.display_name?.value
-      }
-    }
+    this.loading = false;
   }
 
   next() {
@@ -108,5 +81,8 @@ export class PermissionListComponent implements OnInit {
   isFirstPage(): boolean {
   }
 
+  showNewPermissionDialog() {
+    this.newPermissionDialogChild?.showDialog();
+  }
 
 }
