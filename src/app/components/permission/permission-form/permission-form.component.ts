@@ -15,6 +15,7 @@ export class PermissionFormComponent implements OnInit {
 
   public form: FormGroup;
 
+  @Output() permissionCreated = new EventEmitter<{ id: number | null }>();
   @Output() permissionSaved = new EventEmitter<{ id: number | null }>();
 
   @Input() permissionId: number = 0;
@@ -92,7 +93,7 @@ export class PermissionFormComponent implements OnInit {
     this.permissionFieldError = "";
   }
 
-  async submitPermission() {
+  async submitEditPermission() {
     const newPermission: PermissionModel = {
       id: this.permissionId,
       permission: this.form.value.permission,
@@ -105,6 +106,21 @@ export class PermissionFormComponent implements OnInit {
       })
       .catch((err) => {
         this.permissionSaved.emit({id: null});
+      });
+  }
+
+  async submitAddPermission() {
+    const newPermission: PermissionNoIdModel = {
+      permission: this.form.value.permission,
+      description: this.form.value.description,
+      displayName: this.form.value.displayName
+    }
+    await this.permissionService.addPermission(newPermission).toPromise()
+      .then((resp) => {
+        this.permissionCreated.emit({id: resp});
+      })
+      .catch((err) => {
+        this.permissionCreated.emit({id: null});
       });
   }
 

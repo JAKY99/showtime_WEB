@@ -28,11 +28,11 @@ export class PermissionEditDialogComponent implements OnInit {
   showDialog(permissionId: number) {
     this.permissionId = permissionId;
     setTimeout(() => {
-      if (permissionId !== 0){
+      if (permissionId !== 0) {
         this.editPermissionFormChild.getPermission();
       }
       this.display = true;
-    },0)
+    }, 0)
   }
 
   closeDialog() {
@@ -42,7 +42,7 @@ export class PermissionEditDialogComponent implements OnInit {
 
   async submitPermission() {
     this.loading = true;
-    await this.editPermissionFormChild?.submitPermission();
+    await this.editPermissionFormChild?.submitEditPermission();
     this.loading = false;
   }
 

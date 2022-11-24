@@ -25,6 +25,7 @@ export class PermissionService {
   }
 
   addPermission(permission: PermissionNoIdModel): Observable<any> {
+    console.log(permission);
     let url = GlobalConstants.API_URL + "/api/v1/permission/add";
     return this.http.post<any>(url, permission);
   }

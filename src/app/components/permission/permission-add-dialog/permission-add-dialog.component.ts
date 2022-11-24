@@ -34,11 +34,12 @@ export class PermissionAddDialogComponent implements OnInit {
 
   async submitPermission() {
     this.loading = true;
-    await this.newPermissionFormChild?.submitPermission();
+    await this.newPermissionFormChild?.submitAddPermission();
     this.loading = false;
   }
 
-  onPermissionSaved($event: { id: number | null }) {
+  onPermissionCreated($event: { id: number | null }) {
+    console.log("entered method")
     if ($event.id != null) {
       this.closeDialog();
       this.showBottomCenterToast(
@@ -48,11 +49,11 @@ export class PermissionAddDialogComponent implements OnInit {
       );
       this.permissionSaved.emit();
     } else {
+      console.log("entered else")
       this.showBottomCenterToast(
         "error",
         "Unable to save",
-        "Permission was not added. please try again later or contact an administrator.",
-        true
+        "Permission was not added. please try again later or contact an administrator."
       );
     }
   }
