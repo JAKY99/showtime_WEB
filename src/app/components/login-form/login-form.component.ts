@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
-import {emailValidator} from "../../common/validators/emailValidator";
+import {RegexFieldValidator} from "../../common/validators/RegexFieldValidator";
 import {GlobalRegex} from "../../common/constants/global-regex";
 import {TokenStorageService} from "../../services/token-storage.service";
 import {HttpHeaders} from "@angular/common/http";
@@ -35,20 +35,21 @@ export class LoginFormComponent implements OnInit {
     }
 
     this.loginForm = new FormGroup({
-      email: new FormControl('',[
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
-        emailValidator(GlobalRegex.emailRegex)
+        RegexFieldValidator(GlobalRegex.emailRegex)
       ]),
       password: new FormControl('', Validators.required)
     });
 
   }
 
-  get email(){
+  get email() {
     return this.loginForm.get('email')?.value;
   }
-  get password(){
+
+  get password() {
     return this.loginForm.get('password')?.value;
   }
 
@@ -59,19 +60,19 @@ export class LoginFormComponent implements OnInit {
         this.header = response.headers;
         // @ts-ignore
         let isUserAdmin = this.tokenStorage.saveToken(this.header.get('Authorization'));
-        if (!isUserAdmin){
+        if (!isUserAdmin) {
           this.addSingleToast(
             'error',
             'Unauthorized !',
             'This account is not authorized to access this platform.',
           )
-        }else{
+        } else {
           this.router.navigate(['/home']).then();
         }
         this.isLoading = false;
       })
       .catch(err => {
-        if (err.status === ClientErrorsEnum.ClientErrorForbidden){
+        if (err.status === ClientErrorsEnum.ClientErrorForbidden) {
           this.addSingleToast(
             'error',
             'Authentication error',
@@ -82,10 +83,12 @@ export class LoginFormComponent implements OnInit {
         this.isLoading = false;
       });
   }
+
   reloadPage(): void {
     window.location.reload();
   }
+
   addSingleToast(severity: string, title: string, details: string, sticky?: boolean) {
-    this.messageService.add({severity:severity, summary:title, detail:details, sticky: sticky});
+    this.messageService.add({severity: severity, summary: title, detail: details, sticky: sticky});
   }
 }

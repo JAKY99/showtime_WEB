@@ -1,0 +1,35 @@
+<p-dialog
+  class="dialog"
+  header="Title"
+  [(visible)]="display"
+  [draggable]="false"
+  [modal]="true"
+  [style]="{width: '60vw'}"
+  (onHide)="closeDialog()"
+>
+  <ng-template pTemplate="header">
+    <h1>New permission</h1>
+  </ng-template>
+  <app-permission-form
+    #newPermissionFormRef
+    (permissionCreated)="onPermissionCreated($event)"
+  ></app-permission-form>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check"
+              (click)="submitPermission()"
+              type="submit"
+              label="Save"
+              styleClass="p-button-primary"
+              [disabled]="newPermissionFormChild.form.invalid"
+              [loading]="loading"
+    >
+    </p-button>
+    <p-button
+      (click)="closeDialog()"
+      label="Cancel"
+      styleClass="p-button-text"
+      [loading]="loading"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+<p-toast position="bottom-center"></p-toast>

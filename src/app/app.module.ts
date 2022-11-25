@@ -30,6 +30,18 @@ import {RippleModule} from "primeng/ripple";
 import { UsersListComponent } from './pages/users-pages/users-list/users-list.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import {PermissionListComponent} from './pages/security-pages/permission-list/permission-list.component';
+import {TableModule} from "primeng/table";
+import {MultiSelectModule} from "primeng/multiselect";
+import {
+  PermissionAddDialogComponent
+} from './components/permission/permission-add-dialog/permission-add-dialog.component';
+import {PermissionFormComponent} from './components/permission/permission-form/permission-form.component';
+import {DialogModule} from "primeng/dialog";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {InputMaskModule} from "primeng/inputmask";
+import { PermissionEditDialogComponent } from './components/permission/permission-edit-dialog/permission-edit-dialog.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -40,7 +52,11 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
     HomePageComponent,
     AvatarMenuComponent,
     UsersListComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    PermissionListComponent,
+    PermissionAddDialogComponent,
+    PermissionFormComponent,
+    PermissionEditDialogComponent,
   ],
   imports: [
     HttpClientModule,
@@ -63,6 +79,12 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
     SlideMenuModule,
     RippleModule,
     BreadcrumbModule,
+    TableModule,
+    MultiSelectModule,
+    DialogModule,
+    InputTextareaModule,
+    InputMaskModule,
+    ConfirmDialogModule
   ],
   providers: [
     {
