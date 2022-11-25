@@ -41,6 +41,7 @@ import {DialogModule} from "primeng/dialog";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
 import { PermissionEditDialogComponent } from './components/permission/permission-edit-dialog/permission-edit-dialog.component';
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { PermissionEditDialogComponent } from './components/permission/permissio
     DialogModule,
     InputTextareaModule,
     InputMaskModule,
+    ConfirmDialogModule
   ],
   providers: [
     {

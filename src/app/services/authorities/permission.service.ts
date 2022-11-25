@@ -34,4 +34,10 @@ export class PermissionService {
     let url = GlobalConstants.API_URL + "/api/v1/permission";
     return this.http.put<any>(url, permission);
   }
+
+  deletePermission(permissionId: number): Observable<any> {
+    console.log("dzqkhdzqfdhgq")
+    let url = GlobalConstants.API_URL + "/api/v1/permission/" + permissionId;
+    return this.http.delete<any>(url);
+  }
 }

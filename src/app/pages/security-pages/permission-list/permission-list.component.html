@@ -52,7 +52,9 @@
             ></button>
             <button style="font-size: .4em" pButton pRipple pTooltip="Delete"
                     tooltipPosition="top" icon="pi pi-trash"
-                    class="p-button-sm p-button-danger"></button>
+                    class="p-button-sm p-button-danger"
+                    disabled
+            (click)="showDeletePermissionDialog(permission.id)"></button>
           </td>
         </tr>
       </ng-template>
@@ -73,3 +75,5 @@
   (permissionSaved)="search(searchParams)"
 >
 </app-permission-edit-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

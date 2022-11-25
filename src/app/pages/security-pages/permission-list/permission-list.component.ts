@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {PermissionModel} from "../../../models/Authorities/permission-model";
-import {LazyLoadEvent} from "primeng/api";
+import {ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService} from "primeng/api";
 import {PermissionService} from "../../../services/authorities/permission.service";
 import {SearchParamsModel} from "../../../models/search/searchParams";
 import {SearchService} from "../../../services/search/search.service";
@@ -15,7 +15,8 @@ import {
   selector: 'app-permission-list',
   templateUrl: './permission-list.component.html',
   styleUrls: ['./permission-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ConfirmationService]
 })
 export class PermissionListComponent implements OnInit {
 
@@ -41,7 +42,8 @@ export class PermissionListComponent implements OnInit {
     filters: null
   }
 
-  constructor(private permissionService: PermissionService, private searchService: SearchService) {
+  constructor(private permissionService: PermissionService, private searchService: SearchService,
+              private confirmationService: ConfirmationService, private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -91,6 +93,30 @@ export class PermissionListComponent implements OnInit {
 
   showEditPermissionDialog(permissionId: number) {
     this.editPermissionDialogChild?.showDialog(permissionId);
+  }
+
+  showDeletePermissionDialog(permissionId: number) {
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: async () => {
+        await this.permissionService.deletePermission(permissionId).toPromise().then(() => {
+          this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'Record deleted'});
+          this.search(this.searchParams);
+        })
+      },
+      reject: (type: any) => {
+        switch(type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({severity:'error', summary:'Rejected', detail:'You have rejected'});
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({severity:'warn', summary:'Cancelled', detail:'You have cancelled'});
+            break;
+        }
+      }
+    });
   }
 
 }
