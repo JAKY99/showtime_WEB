@@ -33,6 +33,7 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {PermissionListComponent} from './pages/security-pages/permission-list/permission-list.component';
 import {TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
+import {TableComponent} from './components/table/table.component';
 import {
   PermissionAddDialogComponent
 } from './components/permission/permission-add-dialog/permission-add-dialog.component';
@@ -42,6 +43,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
 import { PermissionEditDialogComponent } from './components/permission/permission-edit-dialog/permission-edit-dialog.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { SearchService } from "./services/search/search.service";
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     PermissionAddDialogComponent,
     PermissionFormComponent,
     PermissionEditDialogComponent,
+    TableComponent,
   ],
   imports: [
     HttpClientModule,
@@ -84,7 +87,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     DialogModule,
     InputTextareaModule,
     InputMaskModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+
   ],
   providers: [
     {
@@ -100,7 +104,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     HttpClientModule,
     MessageService,
     AuthGuard,
-    JwtHelperService
+    JwtHelperService,
+    SearchService,
   ],
   bootstrap: [AppComponent]
 })

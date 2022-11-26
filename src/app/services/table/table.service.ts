@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class TableService {
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
@@ -27,8 +27,9 @@ export class UserService {
       httpOptions);
   }
 
-  getListOfUsers(searchParams: SearchParamsModel): Observable<any>{
-    let url = GlobalConstants.API_URL + "/management/api/v1/user/all";
+  getList(searchParams: SearchParamsModel, path: string | undefined): Observable<any>{
+    console.log(path)
+    let url = GlobalConstants.API_URL + path;
     // @ts-ignore
     return this.http.post<string>(
       url,
