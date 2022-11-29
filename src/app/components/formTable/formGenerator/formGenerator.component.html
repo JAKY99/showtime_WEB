@@ -1,0 +1,40 @@
+<form
+  class="generator-form"
+  (ngSubmit)="submitEdit()"
+>
+  <div [formGroup]="form">
+    <div class="field">
+      <label for="display-name" class="block required">Display Name<span class="text-red-600">*</span></label>
+      <input id="display-name"
+             type="text"
+             aria-describedby="display-name-help"
+             pInputText
+             placeholder="display name"
+             formControlName="displayName"
+             (change)="setDisplayErrors()"
+      />
+      <small id="display-name-help" class="p-error block"
+             *ngIf="isDisplayNameFieldError">Display name is required.</small>
+    </div>
+    <div class="field">
+      <label for="permission" class="block">Permission<span class="text-red-600">*</span></label>
+      <input id="permission"
+             type="text"
+             aria-describedby="permission-help"
+             pInputText
+             placeholder="user:movie_read"
+             formControlName="permission"
+             (change)="setPermissionErrors()"
+      />
+      <small id="generator-help" class="p-error block" *ngIf="fieldError">
+        {{fieldError}}
+      </small>
+      <small id="generator-help2" class="block">Format: entity:permission_name</small>
+    </div>
+    <div class="field">
+      <label for="description" class="block">Description</label>
+      <textarea id="description" [rows]="5" [cols]="50" pInputTextarea formControlName="description"></textarea>
+    </div>
+  </div>
+</form>
+

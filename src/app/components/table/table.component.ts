@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SearchParamsModel} from "../../models/search/searchParams";
 import {SearchService} from "../../services/search/search.service";
 import {ConfirmationService, ConfirmEventType, LazyLoadEvent, MessageService} from "primeng/api";
@@ -7,15 +7,18 @@ import {formatDate} from "@angular/common";
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { TableService } from "../../services/table/table.service";
+import {ElementAddDialogComponent} from "../formTable/element-add-dialog/element-add-dialog.component";
+import {PermissionEditDialogComponent} from "../permission/permission-edit-dialog/permission-edit-dialog.component";
 @Component({
   selector: 'app-table-component',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
+
 export class TableComponent implements OnInit {
   @Input() path: string | undefined;
   @Input() columns: any[] | undefined;
-
+  @ViewChild('newElementAddDialogChild') newElementAddDialogChild: ElementAddDialogComponent | undefined
   // @ts-ignore
   elementList: any = {};
   first: number = 0;
@@ -96,15 +99,15 @@ export class TableComponent implements OnInit {
   isFirstPage(): boolean {
   }
 
-  showDialog() {
+  showAddDialog() {
+    this.newElementAddDialogChild?.showDialog();
+  }
+
+  showEditDialog(id: number) {
 
   }
 
-  showEditDialog(permissionId: number) {
-
-  }
-
-  showDeleteDialog(permissionId: number) {
+  showDeleteDialog(id: number) {
 
   }
   connection(){
