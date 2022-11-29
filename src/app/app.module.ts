@@ -33,6 +33,7 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {PermissionListComponent} from './pages/security-pages/permission-list/permission-list.component';
 import {TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
+import {TableComponent} from './components/table/table.component';
 import {
   PermissionAddDialogComponent
 } from './components/permission/permission-add-dialog/permission-add-dialog.component';
@@ -42,6 +43,12 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {InputMaskModule} from "primeng/inputmask";
 import { PermissionEditDialogComponent } from './components/permission/permission-edit-dialog/permission-edit-dialog.component';
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import { SearchService } from "./services/search/search.service";
+import {FormGeneratorComponent} from "./components/formTable/formGenerator/formGenerator.component";
+import {ElementAddDialogComponent} from "./components/formTable/element-add-dialog/element-add-dialog.component";
+import { AgGridComponent } from './components/ag-grid/ag-grid.component';
+import {AgGridModule} from "ag-grid-angular";
+import {SelectButtonModule} from "primeng/selectbutton";
 
 @NgModule({
   declarations: [
@@ -57,35 +64,42 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     PermissionAddDialogComponent,
     PermissionFormComponent,
     PermissionEditDialogComponent,
+    TableComponent,
+    FormGeneratorComponent,
+    ElementAddDialogComponent,
+    AgGridComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SidebarModule,
-    ButtonModule,
-    MenubarModule,
-    InputTextModule,
-    CardModule,
-    FormsModule,
-    PasswordModule,
-    DividerModule,
-    ReactiveFormsModule,
-    ToastModule,
-    BlockUIModule,
-    AvatarModule,
-    BadgeModule,
-    SlideMenuModule,
-    RippleModule,
-    BreadcrumbModule,
-    TableModule,
-    MultiSelectModule,
-    DialogModule,
-    InputTextareaModule,
-    InputMaskModule,
-    ConfirmDialogModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SidebarModule,
+        ButtonModule,
+        MenubarModule,
+        InputTextModule,
+        CardModule,
+        FormsModule,
+        PasswordModule,
+        DividerModule,
+        ReactiveFormsModule,
+        ToastModule,
+        BlockUIModule,
+        AvatarModule,
+        BadgeModule,
+        SlideMenuModule,
+        RippleModule,
+        BreadcrumbModule,
+        TableModule,
+        MultiSelectModule,
+        DialogModule,
+        InputTextareaModule,
+        InputMaskModule,
+        ConfirmDialogModule,
+        AgGridModule,
+        SelectButtonModule,
+
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -100,7 +114,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     HttpClientModule,
     MessageService,
     AuthGuard,
-    JwtHelperService
+    JwtHelperService,
+    SearchService,
   ],
   bootstrap: [AppComponent]
 })

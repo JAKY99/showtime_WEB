@@ -1,0 +1,129 @@
+
+
+  <div class="flex mb-2">
+    <h3 class="m-0 flex align-items-center">{{titleTable}}</h3>
+    <div class="ml-auto">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-sm mr-2"
+        (click)="displayAddDialog()"
+      ></button>
+      <button style="font-size: .4em" pButton pRipple pTooltip="Edit"
+              tooltipPosition="top"
+              icon="pi pi-pencil"
+              class="p-button-sm p-button-warning mr-2"
+              (click)="displayEditDialog()"
+      ></button>
+      <button style="font-size: .4em" pButton pRipple pTooltip="Delete"
+              tooltipPosition="top" icon="pi pi-trash"
+              class="p-button-sm p-button-danger"
+              disabled
+      ></button>
+    </div>
+  </div>
+
+<ag-grid-angular
+  style="width: 100%; height: 100%;"
+  class="ag-theme-alpine"
+  [pagination]="true"
+  [paginationPageSize]="10"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [rowSelection]="rowSelection"
+  [gridOptions]="gridOptions"
+  (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>
+  <p-dialog [header]="addDialogTitle" [(visible)]="displayAdd" [style]="{width: '50vw'}" [modal]="true" [dismissableMask]="true" >
+    <form
+      class="add-form"
+      (ngSubmit)="submitAdd()"
+
+    >
+      <div [formGroup]="formAdd" *ngFor="let column of columnDefs; let myIndex = index" class="agGridForm">
+        <div *ngIf="column.formAdd===true" class="field agGridField">
+          <label for="{{ column.field }}" class="{{ column.requiredAdd===true?'block required':''}}">{{ column.headerName }}<span *ngIf="column.requiredAdd===true" class="text-red-600">*</span></label>
+          <input *ngIf="column.type=='text'||column.type=='password'||column.type=='email'" id="{{ column.field }}"
+                 type="{{ column.type }}"
+                 aria-describedby="help"
+                 pInputText
+                 required="{{column.requiredAdd===true?'required':''}}"
+                 placeholder="{{ column.headerName }}"
+                 formControlName="{{ column.field }}"
+                 class="agGridField"
+
+          />
+          <select *ngIf="column.type=='select'"
+                  id="{{ column.field }}"
+                  formControlName="{{ column.field }}"
+                  class="p-inputtext p-component p-element agGridField ng-pristine ng-star-inserted ng-valid ng-touched p-filled"
+          >
+            <option *ngFor="let option of formListsOptions[column.field];let myIndex2 = index"
+                    selected="{{displayAdd?column.defaultOptionOnCreate.value==option[column.optionNameToDisplay]:''}}"
+                    [value]="option[column.optionNameToDisplay]">{{option[column.optionNameToDisplay]}}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="column.field.errors?.['required']">
+          {{column.field}} is required.
+        </div>
+      </div>
+      <div class="d-flex align-items-baseline">
+        <p-button icon="pi pi-check"
+                  [loading]="isAddLoading"
+                  type="submit"
+                  label="Submit"
+                  styleClass="p-button-success mr-3"
+                  [disabled]="formAdd.invalid || submitAddDisable"
+        >
+
+        </p-button> <p-button icon="pi pi-times" (click)="displayAdd=false" label="Cancel" styleClass="p-button-danger"></p-button>
+      </div>
+    </form>
+
+  </p-dialog>
+  <p-dialog [header]="editDialogTitle" [(visible)]="displayEdit" [style]="{width: '50vw'}" [modal]="true" [dismissableMask]="true">
+    <form (ngSubmit)="submitEdit()"
+
+      class="edit-form"
+
+
+    >
+      <div [formGroup]="formEdit"  *ngFor="let column of columnDefs; let myIndex = index" class="agGridForm">
+        <div *ngIf="column.formEdit===true" class="field agGridField">
+          <label for="{{ column.field }}" class="{{ column.requiredEdit===true?'block required':''}}">{{ column.headerName }}<span *ngIf="column.requiredEdit===true" class="text-red-600">*</span></label>
+          <input *ngIf="column.type=='text'||column.type=='password'||column.type=='email'" id="{{ column.field }}"
+                 type="{{ column.type }}"
+                 aria-describedby="help"
+                 pInputText
+                 value="{{currentRow.length>0 && displayEdit?this.gridApi.getSelectedRows()[0][column.field]:''}}"
+                 placeholder="{{ column.headerName }}"
+                 formControlName="{{ column.field }}"
+                 class="agGridField"
+
+          />
+
+          <select *ngIf="column.type=='select'"
+                  id="{{ column.field }}"
+                 formControlName="{{ column.field }}"
+                  class="p-inputtext p-component p-element agGridField ng-pristine ng-star-inserted ng-valid ng-touched p-filled"
+          >
+            <option *ngFor="let option of formListsOptions[column.field]"
+                    selected="{{currentRow.length>0 && displayEdit?this.gridApi.getSelectedRows()[0][column.field][column.optionNameToDisplay]==option[column.optionNameToDisplay]:false}}"
+                    [value]="option[column.optionNameToDisplay]">{{option[column.optionNameToDisplay]}}</option>
+          </select>
+
+        </div>
+
+      </div>
+      <div class="d-flex align-items-baseline">
+        <p-button icon="pi pi-check"
+                  label="Submit"
+                  [loading]="isEditLoading"
+                  type="submit"
+                  [disabled]="formEdit.invalid || submitEditDisable"
+                  styleClass="p-button-success mr-3"></p-button> <p-button icon="pi pi-times" (click)="displayEdit=false" [disabled]="cancelEditDisable" label="Cancel" styleClass="p-button-danger"></p-button>
+      </div>
+
+    </form>
+
+  </p-dialog>
+  <p-toast position="bottom-center"></p-toast>
