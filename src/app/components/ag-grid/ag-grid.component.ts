@@ -76,15 +76,6 @@ export class AgGridComponent implements OnInit {
     this.formAdd = new FormGroup(formGroupConfigAdd);
 
   }
-  ngAfterViewInit() {
-    this.formEdit.valueChanges.subscribe((value) => {
-      console.log(value)
-      });
-    this.formAdd.valueChanges.subscribe((value) => {
-
-    });
-  }
-
 
   displayAddDialog() {
     this.formAdd.reset();
@@ -166,20 +157,53 @@ export class AgGridComponent implements OnInit {
       }
     });
     this.agGridService.addRow(this.pathAdd, this.formAdd.value).toPromise().then(data => {
+
       this.loadGridData();
-      this.addSingleToast(
-        'success',
-        'Adding Done',
-        'Reloading data',
-        false
-      );
-      this.displayAdd=false;
-      this.submitAddDisable=false;
-      this.cancelAddDisable=false;
-      this.isAddLoading=false;
-      this.formAdd.reset();
+      // @ts-ignore
+      switch (data.body.severity) {
+        case "error":
+          this.addSingleToast(
+            // @ts-ignore
+            data.body.severity,
+            // @ts-ignore
+            data.body.title,
+            // @ts-ignore
+            data.body.details,
+            // @ts-ignore
+            data.body.sticky,
+          );
+          this.submitAddDisable=false;
+          this.cancelAddDisable=false;
+          this.isAddLoading=false;
+          break;
+        case "success":
+          this.addSingleToast(
+            // @ts-ignore
+            data.body.severity,
+            // @ts-ignore
+            data.body.title,
+            // @ts-ignore
+            data.body.details,
+            // @ts-ignore
+            data.body.sticky,
+          );
+          this.displayAdd=false;
+          this.submitAddDisable=false;
+          this.cancelAddDisable=false;
+          this.isAddLoading=false;
+          this.formAdd.reset();
+          break;
+      }
+
+
     } ).catch((error) => {
       console.log(error);
+      this.addSingleToast(
+        'error',
+        'Adding failed',
+        'An error occurred',
+        false
+      );
     });
   }
   submitEdit() {
@@ -203,18 +227,44 @@ export class AgGridComponent implements OnInit {
       }
     });
     this.agGridService.editRow(this.pathEdit, this.formEdit.value).toPromise().then(data => {
-      this.loadGridData();
-      this.addSingleToast(
-        'success',
-        'Update Done',
-        'Reloading data',
-        false
-      );
-      this.displayEdit=false;
-      this.submitEditDisable=false;
-      this.cancelEditDisable=false;
-      this.isEditLoading=false;
-      this.formEdit.reset();
+
+      // @ts-ignore
+      switch (data.body.severity) {
+        case "error":
+          this.addSingleToast(
+            // @ts-ignore
+            data.body.severity,
+            // @ts-ignore
+            data.body.title,
+            // @ts-ignore
+            data.body.details,
+            // @ts-ignore
+            data.body.sticky,
+          );
+          this.submitEditDisable=false;
+          this.cancelEditDisable=false;
+          this.isEditLoading=false;
+          break;
+        case "success":
+          this.addSingleToast(
+            // @ts-ignore
+            data.body.severity,
+            // @ts-ignore
+            data.body.title,
+            // @ts-ignore
+            data.body.details,
+            // @ts-ignore
+            data.body.sticky,
+          );
+          this.displayEdit=false;
+          this.submitEditDisable=false;
+          this.cancelEditDisable=false;
+          this.isEditLoading=false;
+          this.formEdit.reset();
+          this.loadGridData();
+          break;
+      }
+
     } ).catch((error) => {
       console.log(error);
     });
