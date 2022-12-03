@@ -96,6 +96,12 @@ export class AvatarMenuComponent implements OnInit {
       that.client.subscribe("/topic/admin", (message) => {
         if(message.body) {
           this.getNotification();
+          this.addSingleToast(
+            'success',
+            "You've got a new notification",
+            'Please check your notification',
+            false
+          );
         }
       });
     },this.onSocketfailure);
