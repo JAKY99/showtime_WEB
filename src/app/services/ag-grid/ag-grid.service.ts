@@ -20,6 +20,7 @@ export class AgGridService {
     // @ts-ignore
     return this.http.post<string>(
       url,
+      this.tokenStorage.getClientUsername(),
       // @ts-ignore
       httpOptions
     );

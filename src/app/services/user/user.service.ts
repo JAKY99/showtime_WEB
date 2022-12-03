@@ -37,4 +37,24 @@ export class UserService {
       );
   }
 
+  getNotification() {
+    let url = GlobalConstants.API_URL + "/management/api/v1/user/notification";
+    // @ts-ignore
+    return this.http.post<string>(
+      url,
+      this.tokenStorage.getClientUsername(),
+      // @ts-ignore
+      httpOptions);
+
+  }
+
+  updateNotification() {
+    let url = GlobalConstants.API_URL + "/management/api/v1/user/notification/update";
+    // @ts-ignore
+    return this.http.post<string>(
+      url,
+      this.tokenStorage.getClientUsername(),
+      // @ts-ignore
+      httpOptions);
+  }
 }

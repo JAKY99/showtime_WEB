@@ -2,10 +2,11 @@
   <div class="flex align-content-center gap-5">
     <div class="notifications-icons flex gap-4">
       <div class="align-self-center">
-        <i class="pi pi-bell" pBadge style="font-size: 1.2rem" severity="danger"></i>
+        <i *ngIf="unread_notification.length>0" class="pi pi-bell" pBadge [value]="unread_notification.length.toString()" (click)="showModalNotificationAlert()" style="font-size: 1.2rem" ></i>
+        <i *ngIf="unread_notification.length==0" class="pi pi-bell"  (click)="showModalNotificationAlert()" style="font-size: 1.2rem" ></i>
       </div>
       <div class="align-self-center">
-        <i class="pi pi-envelope" pBadge style="font-size: 1.2rem"></i>
+        <i class="pi pi-envelope" pBadge style="font-size: 1.2rem" ></i>
       </div>
     </div>
     <div class="flex align-items-center gap-2 cursor-pointer avatar-container" (click)="avatarSlideMenu.toggle($event)">
@@ -36,4 +37,20 @@
     [viewportHeight]="250"
     [style]="{'min-width':'175px'}"
   ></p-slideMenu>
+  <p-dialog [header]="alertDialogTitle" [(visible)]="displayAlert" [style]="{width: '70%',height:'100%'}" [modal]="true" [dismissableMask]="true">
+    <app-ag-grid *ngIf="displayAlert"
+      [columnDefs]="columnDefs"
+      [url]="path"
+      [pathAdd]="pathAdd"
+      [pathEdit]="pathEdit"
+      [pathDelete]="pathDelete"
+      [addDialogTitle]="addDialogTitle"
+      [editDialogTitle]="editDialogTitle"
+      [deleteDialogTitle]="deleteDialogTitle"
+      [addEnabled]="addEnabled"
+      [editEnabled]="editEnabled"
+      [deleteEnabled]="deleteEnabled"
+    ></app-ag-grid>
+  </p-dialog>
+  <p-toast position="bottom-center"></p-toast>
 </div>

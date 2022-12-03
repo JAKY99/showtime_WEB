@@ -27,6 +27,9 @@ export class AgGridComponent implements OnInit {
   displayAdd = false;
   formAdd = new FormGroup({});
   formEdit = new FormGroup({});
+  @Input() addEnabled : boolean = true ;
+  @Input() editEnabled : boolean = true ;
+  @Input() deleteEnabled : boolean = true ;
   displayEdit = false;
    // @ts-ignore
    gridOptions = {
@@ -117,14 +120,18 @@ export class AgGridComponent implements OnInit {
 
   onGridReady(event : GridReadyEvent) {
     this.gridApi = event.api
-    this.gridApi.sizeColumnsToFit()
+    setTimeout(() => {
+      this.gridApi.sizeColumnsToFit()
+    }, 100);
+
 
   }
 
 
   loadGridData() {
-    this.agGridService.getRowsData(this.url).toPromise().then(data => {
-      this.rowData = data;
+    this.agGridService.getRowsData(this.url).toPromise().then(response => {
+      this.rowData = response.body;
+      // console.log(response)
     } ).catch((error) => {
       console.log(error);
     });

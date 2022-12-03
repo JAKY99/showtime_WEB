@@ -5,16 +5,19 @@
     <div class="ml-auto">
       <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-sm mr-2"
         (click)="displayAddDialog()"
+        *ngIf="addEnabled"
       ></button>
       <button style="font-size: .4em" pButton pRipple pTooltip="Edit"
               tooltipPosition="top"
               icon="pi pi-pencil"
               class="p-button-sm p-button-warning mr-2"
               (click)="displayEditDialog()"
+              *ngIf="editEnabled"
       ></button>
       <button style="font-size: .4em" pButton pRipple pTooltip="Delete"
               tooltipPosition="top" icon="pi pi-trash"
               class="p-button-sm p-button-danger"
+              *ngIf="deleteEnabled"
               disabled
       ></button>
     </div>
