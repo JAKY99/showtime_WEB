@@ -3,6 +3,7 @@ import {MenuItem, MessageService} from "primeng/api";
 import {UserAvatarModel} from "../../models/user/user-avatar-model";
 import {ClientSuccessEnum} from "../../common/enums/http-status-codes/client-success-enum";
 import {UserService} from "../../services/user/user.service";
+import {GlobalConstants} from "../../common/constants/global-constants";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 
@@ -32,7 +33,7 @@ export class AvatarMenuComponent implements OnInit {
   items: MenuItem[] = [];
   notification : any[] = [];
   unread_notification : any[] = [];
-  url = 'http://localhost:8082/websocket'
+  url = GlobalConstants.WEBSOCKET_URL
   client: any;
 
   constructor(
