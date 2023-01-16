@@ -34,6 +34,7 @@ export class AvatarMenuComponent implements OnInit {
   notification : any[] = [];
   unread_notification : any[] = [];
   url = GlobalConstants.WEBSOCKET_URL
+  env = GlobalConstants.ENV;
   client: any;
 
   constructor(
@@ -94,7 +95,7 @@ export class AvatarMenuComponent implements OnInit {
     // @ts-ignore
     this.client.connect({}, ()=>{
       // @ts-ignore
-      that.client.subscribe("/topic/admin", (message) => {
+      that.client.subscribe("/topic/admin/"+this.env, (message) => {
         if(message.body) {
           this.getNotification();
           this.addSingleToast(
