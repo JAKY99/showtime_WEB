@@ -1,4 +1,4 @@
-name: workflow staging
+name: workflow staging test
 on:
   workflow_dispatch:
     inputs:
