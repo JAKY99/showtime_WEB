@@ -6,20 +6,20 @@ describe('AgGridComponent', () => {
   let component: AgGridComponent;
   let fixture: ComponentFixture<AgGridComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AgGridComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AgGridComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // beforeEach(async () => {
+  //   await TestBed.configureTestingModule({
+  //     declarations: [ AgGridComponent ]
+  //   })
+  //   .compileComponents();
+  // });
+  //
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(AgGridComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
+  //
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });

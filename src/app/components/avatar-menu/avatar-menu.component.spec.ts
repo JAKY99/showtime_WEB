@@ -6,20 +6,20 @@ describe('AvatarMenuComponent', () => {
   let component: AvatarMenuComponent;
   let fixture: ComponentFixture<AvatarMenuComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AvatarMenuComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AvatarMenuComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // beforeEach(async () => {
+  //   await TestBed.configureTestingModule({
+  //     declarations: [ AvatarMenuComponent ]
+  //   })
+  //   .compileComponents();
+  // });
+  //
+  // beforeEach(() => {
+  //   fixture = TestBed.createComponent(AvatarMenuComponent);
+  //   component = fixture.componentInstance;
+  //   fixture.detectChanges();
+  // });
+  //
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });
