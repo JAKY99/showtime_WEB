@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {PermissionFormComponent} from "../permission-form/permission-form.component";
+import {PermissionFormComponent} from "../../permission/permission-form/permission-form.component";
 import {MessageService} from "primeng/api";
 
 @Component({
