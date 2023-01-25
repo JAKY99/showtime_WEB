@@ -9,7 +9,7 @@ on:
 jobs:
   staging-deploy:
     environment: staging
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image: kevinpsirius/pipeline_deployment_image:v10
       env:
