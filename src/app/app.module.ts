@@ -49,6 +49,8 @@ import {ElementAddDialogComponent} from "./components/formTable/element-add-dial
 import { AgGridComponent } from './components/ag-grid/ag-grid.component';
 import {AgGridModule} from "ag-grid-angular";
 import {SelectButtonModule} from "primeng/selectbutton";
+import { NotificationsPageComponent } from './pages/notifications-page/notifications-page.component';
+import { NotificationsFormComponent } from './components/notifications-form/notifications-form.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import {SelectButtonModule} from "primeng/selectbutton";
     TableComponent,
     FormGeneratorComponent,
     ElementAddDialogComponent,
-    AgGridComponent
+    AgGridComponent,
+    NotificationsPageComponent,
+    NotificationsFormComponent
   ],
     imports: [
         HttpClientModule,
