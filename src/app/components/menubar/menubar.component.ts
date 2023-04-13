@@ -33,6 +33,17 @@ export class MenubarComponent implements OnInit {
     // @ts-ignore
     if (this.clientAuthorities?.permissions.includes(UserManageAuthorities.USER_MANAGE_USERS)) {
       this.items.push({
+        label: 'Notifications',
+        icon: 'pi pi-fw pi-user',
+        items: [
+          {
+            icon: '',
+            label: 'Send Notifications',
+            command: () => this.gotToLink('home/notifications/send')
+          },
+        ]
+      });
+      this.items.push({
         label: 'Users',
         icon: 'pi pi-fw pi-user',
         items: [

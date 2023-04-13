@@ -1,0 +1,15 @@
+<div class="flex  justify-content-center gap-4">
+ <form [formGroup]="notificationForm" class="w-2" (ngSubmit)="sendMessage()">
+  <div class="flex flex-column gap-2">
+    <label>Send To</label>
+    <select formControlName="Destination" id="destinations">
+      <option value="User">Users</option>
+      <option value="Admin">Admins</option>
+    </select>
+    <label>Message</label>
+    <textarea formControlName="Message" id="message"></textarea>
+    <button type="submit" pButton class="btn btn-primary">Send</button>
+  </div>
+ </form>
+  <p-toast position="bottom-center"></p-toast>
+</div>

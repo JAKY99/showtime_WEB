@@ -5,7 +5,7 @@ import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {AuthGuard} from "./auth.guard";
 import {UsersListComponent} from "./pages/users-pages/users-list/users-list.component";
 import {PermissionListComponent} from "./pages/security-pages/permission-list/permission-list.component";
-
+import {NotificationsFormComponent} from "./components/notifications-form/notifications-form.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
@@ -38,6 +38,17 @@ const routes: Routes = [
             component: PermissionListComponent,
             canActivate: [AuthGuard],
             data: {breadcrumb: 'Permissions list'}
+          }
+        ]
+      },
+      {
+        path: 'notifications',
+        children: [
+          {
+            path: 'send',
+            component: NotificationsFormComponent,
+            canActivate: [AuthGuard],
+            data: {breadcrumb: 'Notifications service'}
           }
         ]
       }
