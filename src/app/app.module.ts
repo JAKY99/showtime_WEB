@@ -51,6 +51,8 @@ import {AgGridModule} from "ag-grid-angular";
 import {SelectButtonModule} from "primeng/selectbutton";
 import { NotificationsPageComponent } from './pages/notifications-page/notifications-page.component';
 import { NotificationsFormComponent } from './components/notifications-form/notifications-form.component';
+import { CommentComponent } from './pages/comment-page/comment.component';
+import {ConfirmPopupModule} from "primeng/confirmpopup";
 
 @NgModule({
   declarations: [
@@ -71,39 +73,41 @@ import { NotificationsFormComponent } from './components/notifications-form/noti
     ElementAddDialogComponent,
     AgGridComponent,
     NotificationsPageComponent,
-    NotificationsFormComponent
+    NotificationsFormComponent,
+    CommentComponent,
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        SidebarModule,
-        ButtonModule,
-        MenubarModule,
-        InputTextModule,
-        CardModule,
-        FormsModule,
-        PasswordModule,
-        DividerModule,
-        ReactiveFormsModule,
-        ToastModule,
-        BlockUIModule,
-        AvatarModule,
-        BadgeModule,
-        SlideMenuModule,
-        RippleModule,
-        BreadcrumbModule,
-        TableModule,
-        MultiSelectModule,
-        DialogModule,
-        InputTextareaModule,
-        InputMaskModule,
-        ConfirmDialogModule,
-        AgGridModule,
-        SelectButtonModule,
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SidebarModule,
+    ButtonModule,
+    MenubarModule,
+    InputTextModule,
+    CardModule,
+    FormsModule,
+    PasswordModule,
+    DividerModule,
+    ReactiveFormsModule,
+    ToastModule,
+    BlockUIModule,
+    AvatarModule,
+    BadgeModule,
+    SlideMenuModule,
+    RippleModule,
+    BreadcrumbModule,
+    TableModule,
+    MultiSelectModule,
+    DialogModule,
+    InputTextareaModule,
+    InputMaskModule,
+    ConfirmDialogModule,
+    AgGridModule,
+    SelectButtonModule,
+    ConfirmPopupModule,
 
-    ],
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

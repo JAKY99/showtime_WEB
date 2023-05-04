@@ -1,0 +1,69 @@
+<div class="m-4">
+  <div class="card m-4">
+    <p-table
+      [value]="comment" [paginator]="true"
+      [rows]="rows"
+      [(first)]="first"
+      responsiveLayout="scroll"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="[5,10,25,50]"
+      [lazy]="true" (onLazyLoad)="loadComment($event)"
+      [customSort]="true"
+      [loading]="loading"
+      [totalRecords]="totalRecords"
+      styleClass="p-datatable-gridlines"
+      [showJumpToPageDropdown]="true"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="user_id">User Id
+            <p-sortIcon field="user_id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="movie_id">Movie Id
+            <p-sortIcon field="movie_id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="content">Content
+            <p-sortIcon field="content"></p-sortIcon>
+          </th>
+          <th pSortableColumn="status">Status
+            <p-sortIcon field="status"></p-sortIcon>
+          </th>
+          <th pSortableColumn="spoiler">Spoiler
+            <p-sortIcon field="spoiler"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-comment>
+        <tr>
+          <td>{{comment.user.id}}</td>
+          <td>{{comment.movie_id}}</td>
+          <td>{{comment.content}}</td>
+          <td>{{comment.validate == false ? "Not valid" : "valid"}}</td>
+          <td>{{comment.spoiler == false ? "Not spoiler" : "spoiler"}}</td>
+          <td>
+
+            <div class="card flex justify-content-center gap-2">
+            <p-toast></p-toast>
+            <p-confirmPopup></p-confirmPopup>
+            <p-button (click)="comment.spoiler == false ? confirm(comment.id, comment.content) : ''" icon="pi pi-check" label="" styleClass="p-button-success" [disabled]="comment.spoiler"></p-button>
+
+            <p-toast></p-toast>
+            <p-confirmPopup></p-confirmPopup>
+            <p-button (click)="comment.spoiler == false ? reject(comment.id, comment.content) : ''" icon="pi pi-times-circle" label="" styleClass="p-button-warning" [disabled]="comment.spoiler"></p-button>
+
+            <p-toast></p-toast>
+            <p-confirmPopup></p-confirmPopup>
+            <p-button (click)="comment.spoiler == false ? spoiler(comment.id, comment.content) : ''" icon="pi pi-shield" label="" styleClass="p-button-danger" [disabled]="comment.spoiler"></p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="empty-message">
+        <tr>
+          <td colspan="5">No data available...</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

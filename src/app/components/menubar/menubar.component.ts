@@ -60,6 +60,23 @@ export class MenubarComponent implements OnInit {
           }
         ]
       });
+      this.items.push({
+        label: 'Comments',
+        icon: 'pi pi-fw pi-comments',
+        items: [
+          {
+            label: 'Search',
+            icon: 'pi pi-fw pi-comments',
+            items: [
+              {
+                icon: 'pi pi-fw pi-bars',
+                label: 'List',
+                command: () => this.gotToLink('home/comment/validation')
+              }
+            ]
+          }
+        ]
+      });
     }
 
     // @ts-ignore
