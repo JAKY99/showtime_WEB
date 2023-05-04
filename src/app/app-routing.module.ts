@@ -6,6 +6,7 @@ import {AuthGuard} from "./auth.guard";
 import {UsersListComponent} from "./pages/users-pages/users-list/users-list.component";
 import {PermissionListComponent} from "./pages/security-pages/permission-list/permission-list.component";
 import {NotificationsFormComponent} from "./components/notifications-form/notifications-form.component";
+import {CommentComponent} from "./pages/comment-page/comment.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
@@ -49,6 +50,17 @@ const routes: Routes = [
             component: NotificationsFormComponent,
             canActivate: [AuthGuard],
             data: {breadcrumb: 'Notifications service'}
+          }
+        ]
+      },
+      {
+        path: 'comment',
+        children: [
+          {
+            path: 'validation',
+            component: CommentComponent,
+            canActivate: [AuthGuard],
+            data: {breadcrumb: 'Comments service'}
           }
         ]
       }
