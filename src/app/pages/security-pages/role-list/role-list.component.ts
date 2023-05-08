@@ -20,7 +20,8 @@ export class RoleListComponent implements OnInit {
       formAdd: false,
       formEdit: false,
       filter: true,
-      floatingFilter: true
+      floatingFilter: true,
+      resizable: true
     },
     {
       'field': 'role',
@@ -31,7 +32,8 @@ export class RoleListComponent implements OnInit {
       requiredAdd: true,
       requiredEdit: true,
       filter: true,
-      floatingFilter: true
+      floatingFilter: true,
+      resizable: true
     },
     {
       'field': 'display_name',
@@ -42,7 +44,8 @@ export class RoleListComponent implements OnInit {
       requiredAdd: true,
       requiredEdit: true,
       filter: true,
-      floatingFilter: true
+      floatingFilter: true,
+      resizable: true
     },
     // @ts-ignore
     {
@@ -63,7 +66,8 @@ export class RoleListComponent implements OnInit {
       // },
       filter: true,
       floatingFilter: true,
-      width: 1000
+      width: 1000,
+      resizable: true
     },
     {
       'field': 'description',
@@ -74,7 +78,8 @@ export class RoleListComponent implements OnInit {
       requiredAdd: true,
       requiredEdit: true,
       filter: true,
-      floatingFilter: true
+      floatingFilter: true,
+      resizable: true
     },
   ];
   path = "/api/v1/role/aggrid/all";
