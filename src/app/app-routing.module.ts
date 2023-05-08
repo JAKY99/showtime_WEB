@@ -7,6 +7,7 @@ import {UsersListComponent} from "./pages/users-pages/users-list/users-list.comp
 import {PermissionListComponent} from "./pages/security-pages/permission-list/permission-list.component";
 import {NotificationsFormComponent} from "./components/notifications-form/notifications-form.component";
 import {CommentComponent} from "./pages/comment-page/comment.component";
+import {RoleListComponent} from "./pages/security-pages/role-list/role-list.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
@@ -39,6 +40,12 @@ const routes: Routes = [
             component: PermissionListComponent,
             canActivate: [AuthGuard],
             data: {breadcrumb: 'Permissions list'}
+          },
+          {
+            path: 'role',
+            component: RoleListComponent,
+            canActivate: [AuthGuard],
+            data: {breadcrumb: 'Roles list'}
           }
         ]
       },

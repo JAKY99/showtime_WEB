@@ -36,7 +36,7 @@ export class AgGridComponent implements OnInit {
     // Add event handlers
     onCellClicked: (event: CellClickedEvent) => event,
   }
-  gridApi: any;
+  @Input() gridApi: any;
   public currentRow: [] = [];
   submitEditDisable: boolean=false;
   cancelEditDisable : boolean=false;
@@ -105,9 +105,10 @@ export class AgGridComponent implements OnInit {
       'Please select one row to edit',
       false
     );
+    console.log(this.currentRow)
     for (let key in this.formEdit.controls) {
-      // @ts-ignore
-      this.formEdit.controls[key].setValue(this.currentRow[0][key]);
+        // @ts-ignore
+        this.formEdit.controls[key].setValue(this.currentRow[0][key]);
       // @ts-ignore
       setTimeout(() => {
         document.getElementById(key)?.dispatchEvent(new Event('input'));
