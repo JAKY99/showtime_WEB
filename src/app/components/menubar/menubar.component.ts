@@ -93,6 +93,11 @@ export class MenubarComponent implements OnInit {
                 label: 'Permissions List',
                 icon: 'pi pi-fw pi-list',
                 command: () => this.gotToLink('home/security/permission')
+              },
+              {
+                label: 'Roles List',
+                icon: 'pi pi-fw pi-list',
+                command: () => this.gotToLink('home/security/role')
               }
             ]
           }
