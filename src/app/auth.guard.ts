@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {TokenStorageService} from "./services/token-storage.service";
+import {RolesEnum} from "./common/enums/authorities/roles-enum";
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,18 @@ import {TokenStorageService} from "./services/token-storage.service";
 export class AuthGuard implements CanActivate {
   constructor(private router: Router, private tokenStorage: TokenStorageService) {
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     // @ts-ignore
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.tokenStorage.isTokenExpired()){
+    // @ts-ignore
+    this.clientAuthorities = this.tokenStorage.getClientAuthorities();
+    // @ts-ignore
+    if (!this.clientAuthorities?.role === RolesEnum.ADMIN) {
+      return false;
+    }
+    if (!this.tokenStorage.isTokenExpired()) {
       return true
     }
     this.router.navigate(['/login']).then(() => {
