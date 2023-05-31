@@ -8,6 +8,7 @@ import {PermissionListComponent} from "./pages/security-pages/permission-list/pe
 import {NotificationsFormComponent} from "./components/notifications-form/notifications-form.component";
 import {CommentComponent} from "./pages/comment-page/comment.component";
 import {RoleListComponent} from "./pages/security-pages/role-list/role-list.component";
+import {Page404Component} from "./pages/page404/page404.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
@@ -70,7 +71,8 @@ const routes: Routes = [
             data: {breadcrumb: 'Comments service'}
           }
         ]
-      }
+      },
+      { path: '**', component: Page404Component },
     ]
   },
 ];

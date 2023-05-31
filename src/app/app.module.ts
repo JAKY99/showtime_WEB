@@ -54,6 +54,7 @@ import { NotificationsFormComponent } from './components/notifications-form/noti
 import { CommentComponent } from './pages/comment-page/comment.component';
 import {ConfirmPopupModule} from "primeng/confirmpopup";
 import { RoleListComponent } from './pages/security-pages/role-list/role-list.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { RoleListComponent } from './pages/security-pages/role-list/role-list.co
     NotificationsFormComponent,
     CommentComponent,
     RoleListComponent,
+    Page404Component,
   ],
   imports: [
     HttpClientModule,
