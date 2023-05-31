@@ -20,7 +20,9 @@ export class AuthGuard implements CanActivate {
     // @ts-ignore
     console.log(this.clientAuthorities)
     // @ts-ignore
-    if (!this.clientAuthorities.role === RolesEnum.ADMIN) {
+    console.log(`!this.clientAuthorities.role === RolesEnum.ADMIN:${(!this.clientAuthorities.role === RolesEnum.ADMIN)}`)
+    // @ts-ignore
+    if (!(this.clientAuthorities.role === RolesEnum.ADMIN)) {
       this.router.navigate(['/login']).then(() => {
         this.tokenStorage.logOut()
         return false;
