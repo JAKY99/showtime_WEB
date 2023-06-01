@@ -10,6 +10,11 @@ jobs:
   sonarqube-test:
     environment: production
     runs-on: ubuntu-latest
+    container:
+      image: kevinpsirius/pipeline_deployment_image:v10
+      env:
+        sonar_login: ${{ secrets.SONAR_LOGIN }}
+        sonar_password: ${{ secrets.SONAR_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -21,9 +26,6 @@ jobs:
           sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
           npm ci &&  ng test --code-coverage --watch=false
           npm run sonar
-    env:
-      sonar_login: ${{ secrets.SONAR_LOGIN }}
-      sonar_password: ${{ secrets.SONAR_PASSWORD }}
   prod-deploy:
     needs: sonarqube-test
     environment: production
