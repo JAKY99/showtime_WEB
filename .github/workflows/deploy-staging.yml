@@ -25,9 +25,6 @@ jobs:
           cd /var/www/html/showtime_WEB && sed -i "s/SONAR_HOST_URL/$(echo $sonar_host_url | sed 's/[\/&]/\\&/g')/g" sonar-project.properties
           cd /var/www/html/showtime_WEB && npm  i &&  ng test --code-coverage --watch=false
           cd /var/www/html/showtime_WEB && npm run sonar
-    env:
-      sonar_login: ${{ secrets.SONAR_LOGIN }}
-      sonar_password: ${{ secrets.SONAR_PASSWORD }}
   staging-deploy:
     needs: sonarqube-test
     environment: staging

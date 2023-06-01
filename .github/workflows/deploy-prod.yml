@@ -13,7 +13,7 @@ jobs:
     container:
       image: kevinpsirius/pipeline_deployment_image:v10
       env:
-        sonar_login: ${{ secrets.SONAR_LOGIN }}
+        sonar_login: ${{ secrets.SONAR_TOKEN }}
         sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
     steps:
       - name: sonarqubeScan
