@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-deploy-admin": "ng build --base-href /admin/"
+    "build-deploy-admin": "ng build --base-href /admin/",
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,9 @@
     "primeicons": "^5.0.0",
     "primeng": "^13.4.1",
     "rxjs": "~6.6.0",
+    "save-dev": "^0.0.1-security",
     "sockjs-client": "^1.6.1",
+    "sonar-scanner": "^3.1.0",
     "stompjs": "^2.3.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
