@@ -17,10 +17,11 @@ jobs:
         run: |
           cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
           cd /var/www/html/showtime_WEB && mv staging.sonar-project.properties sonar-project.properties
-          cd /var/www/html/showtime_WEB && sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
-          cd /var/www/html/showtime_WEB && sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
+          cd /var/www/html/showtime_WEB && sed -i "s/SONAR_LOGIN/$sonar_login/g" sonar-project.properties
+          cd /var/www/html/showtime_WEB && sed -i "s/SONAR_PASSWORD/$sonar_password/g" sonar-project.properties
           cd /var/www/html/showtime_WEB && npm  i &&  ng test --code-coverage --watch=false
-          chmod 777 -R /var/www/html/showtime_WEB/node_modules
+          chmod 777 -R /var/www/html/showtime_WEB/node_modules/*
+          chmod 777 -R /var/www/html/showtime_WEB/node_modules/sonar-scanner/bin/*
           cd /var/www/html/showtime_WEB && npm run sonar
   staging-deploy:
     needs: sonarqube-test
