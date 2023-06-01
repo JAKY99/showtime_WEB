@@ -14,7 +14,6 @@ jobs:
       image: kevinpsirius/pipeline_deployment_image:v10
       env:
         sonar_login: ${{ secrets.SONAR_LOGIN }}
-        sonar_password: ${{ secrets.SONAR_PASSWORD }}
         sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
     steps:
       - name: sonarqubeScan
@@ -23,8 +22,7 @@ jobs:
           cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
           cd /var/www/html/showtime_WEB && mv prod.sonar-project.properties /var/www/html/showtime_WEB/sonar-project.properties
           cd /var/www/html/showtime_WEB && sed -i "s/SONAR_LOGIN/$sonar_login/g" sonar-project.properties
-          cd /var/www/html/showtime_WEB && sed -i "s/SONAR_PASSWORD/$sonar_password/g" sonar-project.properties
-          cd /var/www/html/showtime_WEB && sed -i "s/SONAR_HOST_URL/$sonar_host_url/g" sonar-project.properties
+          cd /var/www/html/showtime_WEB && sed -i "s/SONAR_HOST_URL/$(echo $sonar_host_url | sed 's/[\/&]/\\&/g')/g" sonar-project.properties
           cd /var/www/html/showtime_WEB && npm  i &&  ng test --code-coverage --watch=false
           cd /var/www/html/showtime_WEB && npm run sonar
   prod-deploy:
