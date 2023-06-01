@@ -21,13 +21,12 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: sonarqubeScan
         run: |
-          mv prod.sonar-project.properties sonar-project.properties
-          sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
-          sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
-          npm i &&  ng test --code-coverage --watch=false
-          chmod 777 -R coverage
-          chmod 777 -R node_modules/*
-          npm run sonar
+          cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
+          cd /var/www/html/showtime_WEB && mv prod.sonar-project.properties sonar-project.properties
+          cd /var/www/html/showtime_WEB && sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
+          cd /var/www/html/showtime_WEB && sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
+          cd /var/www/html/showtime_WEB && npm i &&  ng test --code-coverage --watch=false
+          cd /var/www/html/showtime_WEB && npm run sonar
   prod-deploy:
     needs: sonarqube-test
     environment: production
