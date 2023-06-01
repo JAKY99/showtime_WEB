@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: sonarqubeScan
         run: |
-          apt install default-jdk -y
+          apt update -y && apt install default-jdk -y
           cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
           cd /var/www/html/showtime_WEB && mv staging.sonar-project.properties sonar-project.properties
           cd /var/www/html/showtime_WEB && sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
