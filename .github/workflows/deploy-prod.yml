@@ -14,13 +14,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: sonarsource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.projectKey=showtime_WEB
+      - name: sonarqubeScan
+        run: |
+          mv staging-sonar-project.properties sonar-project.properties
+          sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
+          sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
+          npm ci &&  ng test --code-coverage --watch=false
+          npm run sonar
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        sonar_login: ${{ secrets.SONAR_LOGIN }}
+        sonar_password: ${{ secrets.SONAR_PASSWORD }}
   prod-deploy:
     needs: sonarqube-test
     environment: production
