@@ -16,9 +16,6 @@ jobs:
         sonar_login: ${{ secrets.SONAR_LOGIN }}
         sonar_password: ${{ secrets.SONAR_PASSWORD }}
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: sonarqubeScan
         run: |
           cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
