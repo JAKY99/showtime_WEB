@@ -22,6 +22,8 @@ jobs:
           sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
           sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
           npm  i &&  ng test --code-coverage --watch=false
+          chmod 777 -R coverage
+          chmod 777 -R node_modules/*
           npm run sonar
   staging-deploy:
     needs: sonarqube-test
