@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: sonarqubeScan
         run: |
-          mv staging-sonar-project.properties sonar-project.properties
+          mv staging.sonar-project.properties sonar-project.properties
           sed -i "s/sonar.login=/sonar.login=$sonar_login/g" sonar-project.properties
           sed -i "s/sonar.password=/sonar.login=$sonar_password/g" sonar-project.properties
           npm ci &&  ng test --code-coverage --watch=false
