@@ -27,8 +27,17 @@ export class AuthGuard implements CanActivate {
       this.tokenStorage.logOut();
       location.href = '/login';
     }
-    if (!this.tokenStorage.isTokenExpired()) {
+    if (!this.tokenStorage.isTokenExpired() ) {
       return true
+    } else if (this.tokenStorage.isTokenExpired() && !this.tokenStorage.isRefreshTokenExpired()) {
+      try {
+        this.tokenStorage.refreshToken();
+        return true
+      } catch (e) {
+        this.router.navigate(['/login']).then(() => {
+          return false
+        });
+      }
     }
     this.router.navigate(['/login']).then(() => {
       return false
