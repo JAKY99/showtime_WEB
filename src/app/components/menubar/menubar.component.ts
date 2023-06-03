@@ -41,6 +41,11 @@ export class MenubarComponent implements OnInit {
             label: 'Send Notifications',
             command: () => this.gotToLink('home/notifications/send')
           },
+          {
+            icon: '',
+            label: 'Search Notifications',
+            command: () => this.gotToLink('home/notifications/list')
+          },
         ]
       });
       this.items.push({

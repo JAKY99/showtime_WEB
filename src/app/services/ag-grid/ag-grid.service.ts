@@ -48,6 +48,16 @@ export class AgGridService {
       httpOptions
     );
   }
+  deleteRow(path: string, dataToDelete: any) {
+    let url = GlobalConstants.API_URL + path;
+    // @ts-ignore
+    return this.http.post<string>(
+      url,
+      dataToDelete,
+      // @ts-ignore
+      httpOptions
+    );
+  }
   getOptionsList(path: string): Observable<any> {
     let url = GlobalConstants.API_URL + path;
     // @ts-ignore

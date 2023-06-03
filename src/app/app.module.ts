@@ -18,7 +18,7 @@ import {PasswordModule} from "primeng/password";
 import {DividerModule} from "primeng/divider";
 import {AuthInterceptor} from "./helpers/auth.interceptor";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {AuthGuard} from "./auth.guard";
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import {BlockUIModule} from "primeng/blockui";
@@ -129,6 +129,7 @@ import { Page404Component } from './pages/page404/page404.component';
     AuthGuard,
     JwtHelperService,
     SearchService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
