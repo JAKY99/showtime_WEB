@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import {AgGridService} from "../../services/ag-grid/ag-grid.service";
 import {DialogModule} from 'primeng/dialog';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MessageService} from "primeng/api";
+import {MessageService,ConfirmationService} from "primeng/api";
+
 @Component({
   selector: 'app-ag-grid',
   templateUrl: './ag-grid.component.html',
@@ -48,7 +49,7 @@ export class AgGridComponent implements OnInit {
 
 
 
-  constructor(agGridService: AgGridService,private messageService: MessageService) {
+  constructor(agGridService: AgGridService,private messageService: MessageService,private confirmationService: ConfirmationService) {
     this.agGridService = agGridService;
   }
 
@@ -279,6 +280,54 @@ export class AgGridComponent implements OnInit {
   }
   addSingleToast(severity: string, title: string, details: string, sticky?: boolean) {
     this.messageService.add({severity: severity, summary: title, detail: details, sticky: sticky});
+  }
+
+  deleteRowConfirmation() {
+    let selectedRows = this.gridApi.getSelectedRows();
+    console.log(selectedRows)
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete element?',
+      accept: () => {
+        this.deleteRow(selectedRows);
+      }
+    });
+
+  }
+  deleteRow(selectedRows:any){
+    selectedRows.forEach((row : any ) => {
+      this.agGridService.deleteRow(this.pathDelete, row).toPromise().then(data => {
+        // @ts-ignore
+        switch (data.body.severity) {
+          case "error":
+            this.addSingleToast(
+              // @ts-ignore
+              data.body.severity,
+              // @ts-ignore
+              data.body.title,
+              // @ts-ignore
+              data.body.details,
+              // @ts-ignore
+              data.body.sticky,
+            );
+            break;
+          case "success":
+            this.addSingleToast(
+              // @ts-ignore
+              data.body.severity,
+              // @ts-ignore
+              data.body.title,
+              // @ts-ignore
+              data.body.details,
+              // @ts-ignore
+              data.body.sticky,
+            );
+            this.loadGridData();
+            break;
+        }
+      } ).catch((error) => {
+        console.log(error);
+      });
+    })
   }
 }
 

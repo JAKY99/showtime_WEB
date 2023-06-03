@@ -18,7 +18,8 @@
               tooltipPosition="top" icon="pi pi-trash"
               class="p-button-sm p-button-danger"
               *ngIf="deleteEnabled"
-              disabled
+              [disabled]="deleteEnabled && !this.gridApi?.getSelectedRows()?.length"
+              (click)="deleteRowConfirmation()"
       ></button>
     </div>
   </div>

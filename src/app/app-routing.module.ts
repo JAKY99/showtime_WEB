@@ -9,6 +9,7 @@ import {NotificationsFormComponent} from "./components/notifications-form/notifi
 import {CommentComponent} from "./pages/comment-page/comment.component";
 import {RoleListComponent} from "./pages/security-pages/role-list/role-list.component";
 import {Page404Component} from "./pages/page404/page404.component";
+import {NotificationsPageComponent} from "./pages/notifications-page/notifications-page.component";
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
@@ -58,6 +59,17 @@ const routes: Routes = [
             component: NotificationsFormComponent,
             canActivate: [AuthGuard],
             data: {breadcrumb: 'Notifications service'}
+          }
+        ]
+      },
+      {
+        path: 'notifications',
+        children: [
+          {
+            path: 'list',
+            component: NotificationsPageComponent,
+            canActivate: [AuthGuard],
+            data: {breadcrumb: 'Notifications List'}
           }
         ]
       },
