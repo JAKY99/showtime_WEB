@@ -55,6 +55,7 @@ import { CommentComponent } from './pages/comment-page/comment.component';
 import {ConfirmPopupModule} from "primeng/confirmpopup";
 import { RoleListComponent } from './pages/security-pages/role-list/role-list.component';
 import { Page404Component } from './pages/page404/page404.component';
+import {ChartModule} from "primeng/chart";
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { Page404Component } from './pages/page404/page404.component';
     AgGridModule,
     SelectButtonModule,
     ConfirmPopupModule,
+    ChartModule,
 
   ],
   providers: [

@@ -60,6 +60,8 @@ export class LoginFormComponent implements OnInit {
         this.header = response.headers;
         // @ts-ignore
         let isUserAdmin = this.tokenStorage.saveToken(this.header.get('Authorization'));
+        // @ts-ignore
+        this.tokenStorage.saveRefreshToken(this.header.get('Refresh'));
         if (!isUserAdmin) {
           this.addSingleToast(
             'error',
