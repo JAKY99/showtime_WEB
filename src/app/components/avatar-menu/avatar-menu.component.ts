@@ -97,6 +97,11 @@ export class AvatarMenuComponent implements OnInit {
       // @ts-ignore
       that.client.subscribe("/topic/admin/"+this.env, (message) => {
         if(message.body) {
+          let notification = JSON.parse(message.body);
+          if(notification.message.includes("metrics updated")){
+            window.dispatchEvent(new Event('metrics-updated'));
+            return
+          }
           this.getNotification();
           this.addSingleToast(
             'success',
