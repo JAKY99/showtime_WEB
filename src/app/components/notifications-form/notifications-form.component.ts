@@ -19,6 +19,9 @@ export class NotificationsFormComponent implements OnInit {
       Destination: new FormControl('User', [
         Validators.required,
       ]),
+      Severity: new FormControl('info', [
+        Validators.required,
+      ]),
       Env: new FormControl('dev', Validators.required),
       Message: new FormControl('', Validators.required)
     });
@@ -29,7 +32,7 @@ export class NotificationsFormComponent implements OnInit {
 
   sendMessage() {
     let topicName = this.env+this.notificationForm.value['Destination']
-    this.NotificationService.pushNotification(topicName,this.notificationForm.value['Message']).subscribe();
+    this.NotificationService.pushNotification(topicName,this.notificationForm.value['Message'],this.notificationForm.value['Severity']).subscribe();
     this.addSingleToast(
       'success',
       "Message sent",

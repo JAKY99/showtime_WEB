@@ -15,13 +15,13 @@ export class NotificationService {
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
 
-  pushNotification(topicName: string,message : string) {
+  pushNotification(topicName: string,message : string,Severity : string) {
     console.log(topicName,message)
     let url = GlobalConstants.API_URL + "/api/v1/kafka/send";
     // @ts-ignore
     return this.http.post<string>(
       url,
-      {topicName : topicName , message : message},
+      {topicName : topicName , message : message,Severity : Severity},
       this.tokenStorage.getClientUsername(),
       // @ts-ignore
       httpOptions);
