@@ -6,6 +6,12 @@
       <option value="User">Users</option>
       <option value="Admin">Admins</option>
     </select>
+    <label>Choice type</label>
+    <select formControlName="Severity" id="type">
+      <option value="info">Info</option>
+      <option value="warning">Warning</option>
+      <option value="error">Error</option>
+    </select>
     <label>Message</label>
     <textarea formControlName="Message" id="message"></textarea>
     <button type="submit" pButton class="btn btn-primary">Send</button>
