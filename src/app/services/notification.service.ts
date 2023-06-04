@@ -21,7 +21,7 @@ export class NotificationService {
     // @ts-ignore
     return this.http.post<string>(
       url,
-      {topicName : topicName , message : message,Severity : Severity},
+      {topicName : topicName , message : message,severity : Severity},
       this.tokenStorage.getClientUsername(),
       // @ts-ignore
       httpOptions);
