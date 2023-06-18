@@ -1,0 +1,6 @@
+projectKey=showtime_WEB
+serverUrl=https://sonarqube.showtime-app.click
+serverVersion=9.9.0.65466
+dashboardUrl=https://sonarqube.showtime-app.click/dashboard?id=showtime_WEB
+ceTaskId=AYh3-HvIDtzUknvZ_PYN
+ceTaskUrl=https://sonarqube.showtime-app.click/api/ce/task?id=AYh3-HvIDtzUknvZ_PYN

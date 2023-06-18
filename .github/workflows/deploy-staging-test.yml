@@ -1,0 +1,24 @@
+name: workflow staging test
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Deploy staging'
+        required: true
+        default: 'latest'
+jobs:
+  staging-deploy:
+    environment: staging
+    runs-on: ubuntu-latest
+    container:
+      image: kevinpsirius/pipeline_deployment_image:v10
+      env:
+        sshKey: ${{ secrets.SSH_KEY }}
+    steps:
+      - name: Generate new dist for staging
+        run: |
+          cd /var/www/html && git clone https://github.com/JAKY99/showtime_WEB.git
+      - name: Generate SSH connection to server with ansible for staging
+        run: |
+          touch /var/www/html/mypckey.pem &&  chmod 600 /var/www/html/mypckey.pem && echo "$sshKey" >> /var/www/html/mypckey.pem
+          cd /var/www/html/playbook && ansible-playbook deploy-dev-admin-front.yml -e "ansible_ssh_timeout=180"

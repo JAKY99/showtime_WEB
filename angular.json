@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -20,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/showtime-WEB",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,7 +36,12 @@
             "styles": [
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/ag-grid-community/dist/styles/ag-grid.css",
+              "node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css"
+
+
             ],
             "scripts": []
           },
@@ -42,13 +50,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "10mb"
                 }
               ],
               "fileReplacements": [
@@ -58,6 +66,47 @@
                 }
               ],
               "outputHashing": "all"
+            },
+            "staging": {
+
+              "budgets": [
+
+                {
+
+                  "type": "initial",
+
+                  "maximumWarning": "10mb",
+
+                  "maximumError": "10mb"
+
+                },
+
+                {
+
+                  "type": "anyComponentStyle",
+
+                  "maximumWarning": "10mb",
+
+                  "maximumError": "10mb"
+
+                }
+
+              ],
+
+              "fileReplacements": [
+
+                {
+
+                  "replace": "src/environments/environment.ts",
+
+                  "with": "src/environments/environment.staging.ts"
+
+                }
+
+              ],
+
+              "outputHashing": "all"
+
             },
             "development": {
               "buildOptimizer": false,
